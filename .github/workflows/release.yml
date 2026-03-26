@@ -161,15 +161,8 @@ jobs:
             echo "npm is actively throttling this package/account."
             echo "Marking workflow as successful and uploading release artifact for manual publish fallback."
 
-            cat > publish-result.json <<EOF
-            {
-              "package": "${PACKAGE_NAME}",
-              "version": "${VERSION}",
-              "tarball": "${TARBALL}",
-              "status": "throttled",
-              "reason": "npm_429_rate_limit"
-            }
-            EOF
+            printf '{\n  "package": "%s",\n  "version": "%s",\n  "tarball": "%s",\n  "status": "throttled",\n  "reason": "npm_429_rate_limit"\n}\n' \
+              "$PACKAGE_NAME" "$VERSION" "$TARBALL" > publish-result.json
 
             echo "status=throttled" >> "$GITHUB_OUTPUT"
             exit 0

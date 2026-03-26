@@ -104,6 +104,9 @@ importers:
       '@droppjs/core':
         specifier: workspace:*
         version: link:../core
+      '@droppjs/plugins-core':
+        specifier: workspace:*
+        version: link:../plugins/core
       '@droppjs/storage-azure':
         specifier: workspace:*
         version: link:../storage/azure

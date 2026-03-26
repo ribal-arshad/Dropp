@@ -22,7 +22,7 @@
   "dependencies": {
     "@droppjs/plugins-core": "workspace:*",
     "@droppjs/types": "workspace:*",
-    "sharp": "^0.33.0"
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

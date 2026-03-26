@@ -55,13 +55,17 @@ jobs:
           npm whoami
           npm ping
 
-      - name: Verify npm scope access
+      - name: Publish package (@droppjs/cli) with retry
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
         run: |
-          npm access list packages @droppjs
-
-      - name: Publish package (@droppjs/cli)
-        run: pnpm --config.node-linker=hoisted --filter @droppjs/cli publish --access public --provenance --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
+          cd packages/cli
+          for i in 1 2 3 4 5; do
+            echo "Publish attempt $i"
+            npm publish --access public --provenance && exit 0
+            if [ "$i" -lt 5 ]; then
+              sleep $((i * 15))
+            fi
+          done
+          echo "Publish failed after retries. If error is 429, rotate NPM_KEY or wait for rate limit reset."
+          exit 1

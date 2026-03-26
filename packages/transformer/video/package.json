@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "@types/fluent-ffmpeg": "^2.1.27",
-    "typescript": "^5.6.3"
+    "typescript": "^6.0.2"
   }
 }

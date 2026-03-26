@@ -17,7 +17,7 @@
     "@droppjs/core": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^5.6.3",
+    "typescript": "^6.0.2",
     "@types/node": "^22.10.0"
   }
 }

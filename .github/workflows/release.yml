@@ -116,7 +116,7 @@ jobs:
           sleep "$JITTER"
 
           # Pack once so retries do not rerun prepack and reduce repeated work.
-          TARBALL=$(npm pack --json --silent | node -e "const fs=require('fs'); const out=JSON.parse(fs.readFileSync(0,'utf8')); console.log(out[0].filename)")
+          TARBALL=$(npm pack --json --silent | tail -n 1 | node -e "const fs=require('fs'); const out=JSON.parse(fs.readFileSync(0,'utf8')); console.log(out[0].filename)")
           echo "Prepared tarball: ${TARBALL}"
 
           ATTEMPTS=4

@@ -46,6 +46,12 @@ jobs:
           npm whoami
           npm ping
 
+      - name: Verify npm scope access
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
+        run: |
+          npm access ls-packages @droppjs
+
       - name: Publish packages
         run: pnpm -r --filter "./packages/**" publish --access public --no-git-checks
         env:

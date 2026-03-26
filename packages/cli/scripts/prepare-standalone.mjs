@@ -42,6 +42,9 @@ async function main() {
   await rm(vendorScopeDir, { recursive: true, force: true });
   await mkdir(vendorScopeDir, { recursive: true });
 
+  const cliPkg = await readJson(join(cliDir, "package.json"));
+  const cliDeps = new Set(Object.keys(cliPkg.dependencies ?? {}));
+
   const packageMeta = new Map();
   for (const rel of internalPackages) {
     const pkgDir = resolve(workspaceRoot, rel);
@@ -61,13 +64,24 @@ async function main() {
     await mkdir(outDir, { recursive: true });
     await cp(distDir, join(outDir, "dist"), { recursive: true });
 
-    const normalizedDeps = { ...(meta.pkg.dependencies ?? {}) };
-    for (const depName of Object.keys(normalizedDeps)) {
-      const depVersion = normalizedDeps[depName];
+    const normalizedDeps = {};
+    for (const [depName, depVersion] of Object.entries(meta.pkg.dependencies ?? {})) {
       if (typeof depVersion === "string" && depVersion.startsWith("workspace:")) {
         const internal = packageMeta.get(depName);
-        if (internal) normalizedDeps[depName] = internal.pkg.version;
+        if (internal) {
+          normalizedDeps[depName] = internal.pkg.version;
+        }
+        continue;
       }
+
+      // External deps that also exist at the CLI root should be resolved from the
+      // root node_modules to avoid duplicating large dependency trees in each
+      // bundled internal package.
+      if (cliDeps.has(depName)) {
+        continue;
+      }
+
+      normalizedDeps[depName] = depVersion;
     }
 
     const outPkg = {

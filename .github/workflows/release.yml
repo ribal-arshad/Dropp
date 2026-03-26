@@ -96,7 +96,26 @@ jobs:
       - name: Validate standalone CLI package
         run: |
           cd packages/cli
-          npm pack --dry-run
+          PACK_META=$(npm pack --json --dry-run)
+          echo "$PACK_META"
+
+          FILE_COUNT=$(echo "$PACK_META" | node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8')); const x=Array.isArray(d)?d[0]:d; console.log(x.entryCount ?? 0)")
+          PACKED_SIZE_BYTES=$(echo "$PACK_META" | node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8')); const x=Array.isArray(d)?d[0]:d; console.log(x.size ?? 0)")
+          UNPACKED_SIZE_BYTES=$(echo "$PACK_META" | node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8')); const x=Array.isArray(d)?d[0]:d; console.log(x.unpackedSize ?? 0)")
+
+          echo "CLI pack stats: files=${FILE_COUNT}, packed=${PACKED_SIZE_BYTES}B, unpacked=${UNPACKED_SIZE_BYTES}B"
+
+          # Guardrails: keep the publish payload reasonable to reduce registry stress.
+          # Thresholds: <= 20MB packed and <= 5000 files.
+          if [ "$PACKED_SIZE_BYTES" -gt 20971520 ]; then
+            echo "Pack size too large (${PACKED_SIZE_BYTES} bytes > 20MB)."
+            exit 1
+          fi
+
+          if [ "$FILE_COUNT" -gt 5000 ]; then
+            echo "Package has too many files (${FILE_COUNT} > 5000)."
+            exit 1
+          fi
 
       - name: Publish @droppjs/cli
         run: |
@@ -119,37 +138,23 @@ jobs:
           TARBALL=$(npm pack --silent | tail -n 1)
           echo "Prepared tarball: ${TARBALL}"
 
-          ATTEMPTS=4
-          for attempt in $(seq 1 "$ATTEMPTS"); do
-            echo "Publish attempt ${attempt}/${ATTEMPTS}"
+          set +e
+          OUTPUT=$(npm publish "${TARBALL}" --access public --provenance --ignore-scripts 2>&1)
+          STATUS=$?
+          set -e
 
-            set +e
-            OUTPUT=$(npm publish "${TARBALL}" --access public --provenance --ignore-scripts 2>&1)
-            STATUS=$?
-            set -e
+          echo "$OUTPUT"
 
-            echo "$OUTPUT"
+          if [ "$STATUS" -eq 0 ]; then
+            echo "Publish succeeded."
+            exit 0
+          fi
 
-            if [ "$STATUS" -eq 0 ]; then
-              echo "Publish succeeded."
-              exit 0
-            fi
-
-            if echo "$OUTPUT" | grep -Eqi "E429|429 Too Many Requests|EAI_AGAIN|ETIMEDOUT|ECONNRESET|5[0-9]{2}"; then
-              if [ "$attempt" -lt "$ATTEMPTS" ]; then
-                # Exponential backoff with jitter: 1m, 2m, 4m (+0-30s)
-                BASE=$((60 * (2 ** (attempt - 1))))
-                EXTRA=$((RANDOM % 30))
-                WAIT=$((BASE + EXTRA))
-                echo "Transient npm error detected. Retrying in ${WAIT}s..."
-                sleep "$WAIT"
-                continue
-              fi
-            fi
-
-            echo "Publish failed with a non-retriable error."
+          if echo "$OUTPUT" | grep -Eqi "E429|429 Too Many Requests"; then
+            echo "npm is actively throttling this package/account."
+            echo "Failing fast to avoid reinforcing rate limits with repeated PUT attempts."
             exit "$STATUS"
-          done
+          fi
 
-          echo "Publish failed after ${ATTEMPTS} attempts due to repeated npm throttling/transient errors."
-          exit 1
+          echo "Publish failed with a non-retriable error."
+          exit "$STATUS"

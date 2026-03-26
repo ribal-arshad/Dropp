@@ -1441,36 +1441,6 @@
         "repository.js"
       ]
     },
-    "server:start": {
-      "aliases": [],
-      "args": {},
-      "description": "Run HTTP API server mode alongside CLI",
-      "flags": {
-        "port": {
-          "description": "Server port",
-          "name": "port",
-          "default": 8787,
-          "hasDynamicHelp": false,
-          "multiple": false,
-          "type": "option"
-        }
-      },
-      "hasDynamicHelp": false,
-      "hiddenAliases": [],
-      "id": "server:start",
-      "pluginAlias": "@droppjs/cli",
-      "pluginName": "@droppjs/cli",
-      "pluginType": "core",
-      "strict": true,
-      "enableJsonFlag": false,
-      "isESM": true,
-      "relativePath": [
-        "dist",
-        "commands",
-        "server",
-        "start.js"
-      ]
-    },
     "plugin:install": {
       "aliases": [],
       "args": {
@@ -1565,6 +1535,36 @@
         "commands",
         "plugin",
         "remove.js"
+      ]
+    },
+    "server:start": {
+      "aliases": [],
+      "args": {},
+      "description": "Run HTTP API server mode alongside CLI",
+      "flags": {
+        "port": {
+          "description": "Server port",
+          "name": "port",
+          "default": 8787,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "server:start",
+      "pluginAlias": "@droppjs/cli",
+      "pluginName": "@droppjs/cli",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "server",
+        "start.js"
       ]
     },
     "upload:resumable": {

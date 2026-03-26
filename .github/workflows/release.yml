@@ -55,40 +55,12 @@ jobs:
           npm whoami
           npm ping
 
-      - name: Publish package (@droppjs/cli) with retry
+      - name: Publish package (@droppjs/cli)
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
         run: |
           cd packages/cli
-          for i in 1 2 3 4 5; do
-            echo "Publish attempt $i"
-            set +e
-            output=$(npm publish --access public --provenance 2>&1)
-            code=$?
-            set -e
-
-            echo "$output"
-
-            if [ "$code" -eq 0 ]; then
-              exit 0
-            fi
-
-            if echo "$output" | grep -q "E403"; then
-              echo "Publish failed with E403. npm requires a granular token with 'bypass 2FA for publish' or an automation token allowed by org policy."
-              echo "Fix npm org/token settings, then re-run workflow_dispatch."
-              exit 1
-            fi
-
-            if echo "$output" | grep -q "E429"; then
-              if [ "$i" -lt 5 ]; then
-                sleep $((i * 20))
-                continue
-              fi
-            fi
-
-            # Non-retryable error
-            exit "$code"
-          done
-
-          echo "Publish failed after retries."
-          exit 1
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
+          npm whoami
+          npm publish --access public --provenance

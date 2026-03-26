@@ -62,6 +62,6 @@ jobs:
           npm access list packages @droppjs
 
       - name: Publish package (@droppjs/cli)
-        run: pnpm --filter @droppjs/cli publish --access public --provenance --no-git-checks
+        run: pnpm --config.node-linker=hoisted --filter @droppjs/cli publish --access public --provenance --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}

@@ -39,6 +39,13 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Verify npm auth
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
+        run: |
+          npm whoami
+          npm ping
+
       - name: Publish packages
         run: pnpm -r --filter "./packages/**" publish --access public --no-git-checks
         env:

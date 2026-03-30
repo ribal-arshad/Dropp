@@ -1,7 +1,6 @@
+// @ts-nocheck
 /**
- * Complete NestJS application with Dropp media management
- *
- * Run: npm run start
+ * NestJS + Dropp example (single-package setup)
  */
 
 import {
@@ -17,175 +16,105 @@ import {
   BadRequestException,
   NotFoundException,
 } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { memoryStorage } from "multer";
-import { NestFactory } from "@nestjs/core";
-import { Dropp } from "@droppjs/core";
-import { PrismaMediaRepository } from "@droppjs/db-prisma";
-import { LocalStorageDriver } from "@droppjs/storage-local";
-import { ImageTransformer } from "@droppjs/transformer-image";
+import path from "node:path";
 import {
+  Dropp,
   DroppService,
-  DroppController as DroppMediaController,
-} from "@droppjs/adapter-nestjs";
-import path from "path";
+  JsonFileMediaRepository,
+  LocalStorageDriver,
+  SharpTransformationDriver,
+} from "droppjs";
 
-// ==========================================
-// Services
-// ==========================================
+const dropp = new Dropp({
+  repository: new JsonFileMediaRepository(
+    path.join(process.cwd(), ".dropp", "media.json"),
+  ),
+  storage: new LocalStorageDriver(
+    path.join(process.cwd(), "uploads"),
+    "/uploads",
+  ),
+  transformer: new SharpTransformationDriver(),
+});
 
-/**
- * DroppService - Provided by @droppjs/adapter-nestjs
- * Alternative: Create your own service by injecting Dropp instance
- */
-@Module({})
-export class MediaServiceModule {}
-
-/**
- * Custom Dropp service example (alternative to provided service)
- */
-export const createDroppInstance = (): Dropp => {
-  return new Dropp({
-    repository: new PrismaMediaRepository(),
-    storage: new LocalStorageDriver({
-      basePath: path.join(process.cwd(), "uploads"),
-    }),
-    transformer: new ImageTransformer(),
-  });
-};
-
-// ==========================================
-// Controllers
-// ==========================================
-
-/**
- * Media controller using provided DroppService from adapter
- * Using decorator-based approach with FileInterceptor
- */
 @Controller("media")
-export class MediaController {
-  private dropp: Dropp;
-
-  constructor() {
-    this.dropp = createDroppInstance();
-  }
+class MediaController {
+  constructor(private readonly droppService: DroppService) {}
 
   @Post("upload")
   @UseInterceptors(
     FileInterceptor("file", {
       storage: memoryStorage(),
-      limits: {
-        fileSize: 50 * 1024 * 1024, // 50MB
-      },
-      fileFilter: (req, file, cb) => {
-        const allowed = [
-          "image/jpeg",
-          "image/png",
-          "image/webp",
-          "image/gif",
-          "video/mp4",
-        ];
-        if (allowed.includes(file.mimetype)) {
-          cb(null, true);
-        } else {
-          cb(new Error("File type not allowed"));
-        }
-      },
+      limits: { fileSize: 50 * 1024 * 1024 },
     }),
   )
   async upload(
-    @UploadedFile() file: any,
+    @UploadedFile()
+    file:
+      | {
+          buffer: Buffer;
+          originalname: string;
+          mimetype: string;
+        }
+      | undefined,
     @Query("model") model?: string,
     @Query("modelId") modelId?: string,
     @Query("collection") collection?: string,
   ) {
-    if (!file) {
-      throw new BadRequestException("No file uploaded");
-    }
-
+    if (!file) throw new BadRequestException("No file uploaded");
     if (!model || !modelId) {
       throw new BadRequestException("model and modelId query params required");
     }
 
-    try {
-      const media = await this.dropp.attach({
-        file: file.buffer,
-        fileName: file.originalname,
-        mimeType: file.mimetype,
-        model,
-        modelId,
-        collection,
-      });
+    const media = await this.droppService.attach({
+      file: file.buffer,
+      fileName: file.originalname,
+      mimeType: file.mimetype,
+      model,
+      modelId,
+      collection,
+    });
 
-      return {
-        success: true,
-        media,
-      };
-    } catch (error) {
-      throw new BadRequestException((error as Error).message);
-    }
+    return { success: true, media };
   }
 
   @Get(":id")
   async getMedia(@Param("id") id: string) {
-    const media = await this.dropp.get(id);
-
-    if (!media) {
-      throw new NotFoundException("Media not found");
-    }
-
+    const media = await this.droppService.get(id);
+    if (!media) throw new NotFoundException("Media not found");
     return media;
   }
 
   @Get("model/:model/:modelId")
-  async getModelMedia(
+  getModelMedia(
     @Param("model") model: string,
     @Param("modelId") modelId: string,
   ) {
-    return this.dropp.getByModel(model, modelId);
+    return this.droppService.getByModel(model, modelId);
   }
 
   @Delete(":id")
   async deleteMedia(@Param("id") id: string) {
-    await this.dropp.delete(id);
+    await this.droppService.delete(id);
     return { success: true };
   }
 }
 
-/**
- * Alternative: Using provided DroppMediaController from adapter
- */
 @Module({
-  controllers: [DroppMediaController, MediaController],
+  controllers: [MediaController],
+  providers: [
+    {
+      provide: DroppService,
+      useFactory: () => new DroppService(dropp),
+    },
+  ],
 })
-export class MediaModule {}
+class AppModule {}
 
-// ==========================================
-// Bootstrap
-// ==========================================
-
-@Module({
-  imports: [MediaModule],
-})
-export class AppModule {}
-
-async function bootstrap() {
+export async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(3000);
-
-  console.log(`✓ NestJS server running on http://localhost:3000`);
-  console.log(`  POST /media/upload?model=article&modelId=123 - Upload media`);
-  console.log(`  GET /media/:id - Get media by ID`);
-  console.log(`  GET /media/model/:model/:modelId - Get media by model`);
-  console.log(`  DELETE /media/:id - Delete media`);
-
-  // Alternative routes from adapter controller
-  console.log(`  POST /media - Upload (from adapter)`);
+  console.log("NestJS example running on http://localhost:3000");
 }
-
-// Run bootstrap
-if (require.main === module) {
-  bootstrap();
-}
-
-export { AppModule };

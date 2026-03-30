@@ -2,27 +2,31 @@
 
 Pick the adapter that fits your app. Ship faster, debate less.
 
-## Express
+No framework wars here. Just working uploads.
 
-Package: `@droppjs/adapter-express`
+All framework helpers are exported from one package: `droppjs`.
+
+## Express
 
 Best for middleware-first APIs.
 
 ## NestJS
 
-Package: `@droppjs/adapter-nestjs`
-
 Best for modules, decorators, and service layers.
 
 ## Next.js
-
-Package: `@droppjs/adapter-next`
 
 Best for App Router handlers and full-stack React apps.
 
 Detailed adapter setup:
 
 - [ADAPTERS.md](ADAPTERS.md)
+
+Working examples:
+
+- [../examples/adapters/express/complete-app.ts](../examples/adapters/express/complete-app.ts)
+- [../examples/adapters/nestjs/complete-app.ts](../examples/adapters/nestjs/complete-app.ts)
+- [../examples/adapters/next/complete-app.ts](../examples/adapters/next/complete-app.ts)
 
 ## Integration checklist
 
@@ -32,10 +36,12 @@ Detailed adapter setup:
 4. Run `doctor` before blaming your framework
 5. Keep adapter code thin; keep business logic in services
 
+If this checklist is boring, that means it's battle-tested.
+
 ## Test coverage status
 
 Adapter integration tests exist for Express, NestJS, and Next.js.
 
 Run:
 
-- `pnpm test:adapters`
+- `pnpm test`

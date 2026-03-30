@@ -1,76 +1,95 @@
 # Framework Adapters
 
-Dropp works with your app style instead of forcing a rewrite.
+Dropp includes framework adapters in the same `droppjs` package.
 
-Pick one adapter, wire it once, and move on with your life.
+Translation: one package, less drama.
+
+Pick your framework, wire once, move on with your life.
 
 ## Quick chooser
 
-- Express → `@droppjs/adapter-express` (middleware-first)
-- NestJS → `@droppjs/adapter-nestjs` (service/controller style)
-- Next.js → `@droppjs/adapter-next` (App Router handlers)
+- Express → middleware-first routes
+- NestJS → modules/services/decorators
+- Next.js → App Router handlers
 
-## Express
+## Install
 
-Best when you want direct control and simple route wiring.
+- `pnpm add droppjs`
 
-Install:
+Then add only what your framework needs:
 
-- `pnpm add @droppjs/adapter-express @droppjs/core @droppjs/types express multer`
+- Express: `pnpm add express multer`
+- NestJS: `pnpm add @nestjs/common @nestjs/core @nestjs/platform-express`
+- Next.js: `pnpm add next`
 
-Flow:
+## Express API
 
-1. Parse file with `multer`
-2. Run `droppAttachMiddleware(...)`
-3. Return `req.media`
-4. Add `droppErrorHandler()` once
+Exports from `droppjs`:
 
-## NestJS
+- `droppAttachMiddleware(options)`
+- `droppErrorHandler()`
+- `DroppController`
 
-Best when your app already uses modules, services, and decorators.
+`droppAttachMiddleware(options)` options:
 
-Install:
+- `dropp`: initialized `Dropp` instance
+- `model`: string
+- `modelId`: string
+- `tenantId?`: string
+- `collection?`: string
+- `metadata?`: object
 
-- `pnpm add @droppjs/adapter-nestjs @droppjs/core @droppjs/types @nestjs/common @nestjs/core @nestjs/platform-express`
+## NestJS API
 
-Flow:
+Exports from `droppjs`:
 
-1. Inject a `Dropp` instance
-2. Use file interceptor
-3. Delegate upload/get/delete to Dropp service or controller
+- `DroppService`
+- `NestDroppController` (renamed export of the adapter controller)
+- `DroppModuleOptions` type
 
-## Next.js
+Typical flow:
 
-Best when your API lives in App Router route handlers.
+1. Create one `Dropp` instance
+2. Inject `DroppService`
+3. Use `FileInterceptor("file")`
+4. Pass `model` + `modelId`
 
-Install:
+## Next.js API
 
-- `pnpm add @droppjs/adapter-next @droppjs/core @droppjs/types next`
+Exports from `droppjs`:
 
-Flow:
+- `handleUpload(request, options)`
+- `handleGetMedia(id, options)`
+- `handleDeleteMedia(id, options)`
+- `handleGetModelMedia(model, modelId, options)`
+- `getMedia(id)`
+- `useMediaUpload()`
 
-1. Read `model` and `modelId` from request
-2. Call `handleUpload`, `handleGetMedia`, `handleDeleteMedia`, or `handleGetModelMedia`
-3. Return the handler response directly
+`handleUpload()` options:
+
+- `dropp`: initialized `Dropp` instance
+- `model`: string
+- `modelId`: string
+- `tenantId?`: string
+- `collection?`: string
 
 ## Rules that prevent pain
 
 - Always pass both `model` and `modelId`
-- Keep adapter code thin; put business logic in your own services
+- Keep adapter code thin; keep business logic in your service layer
 - Run `dropp doctor --verbose` before deep debugging
-- Use `--json` flags when scripting in CI
+- Use `--json` when wiring CLI commands into CI scripts
+
+These rules are boring. Boring is good. Boring means production is calm.
 
 ## Testing
 
-Integration tests are included for Express, NestJS, and Next.js.
-
-Run:
-
-- `pnpm test:adapters`
+- `pnpm test`
 
 ## Related docs
 
 - Quick start: [QUICK_START.md](QUICK_START.md)
+- API reference: [API_REFERENCE.md](API_REFERENCE.md)
+- CLI reference: [CLI_REFERENCE.md](CLI_REFERENCE.md)
 - ORM setup: [ORM_GUIDE.md](ORM_GUIDE.md)
-- Framework setup: [FRAMEWORK_GUIDE.md](FRAMEWORK_GUIDE.md)
 - Plugin guide: [PLUGIN_GUIDE.md](PLUGIN_GUIDE.md)

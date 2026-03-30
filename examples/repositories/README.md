@@ -2,6 +2,10 @@
 
 These examples show how to wire `orm.repository.module` for different ORMs.
 
+All examples use single-package imports from `droppjs`.
+
+Pick one, plug it in, and keep moving.
+
 ## Config pattern
 
 ```json
@@ -29,3 +33,8 @@ These examples show how to wire `orm.repository.module` for different ORMs.
 - Kysely: `examples/repositories/kysely/dropp.repository.ts`
 
 Each file exports `mediaRepository`, compatible with `resolveRepository()`.
+
+Tip: you can also scaffold one with CLI:
+
+- `dropp generate:repository prisma`
+- `dropp generate:repository typeorm`

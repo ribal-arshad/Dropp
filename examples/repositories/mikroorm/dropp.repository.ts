@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { MikroORM } from "@mikro-orm/core";
-import { MikroOrmMediaRepository } from "@droppjs/db-mikroorm";
+import { MikroOrmMediaRepository } from "droppjs";
 
 // Replace this with your MikroORM entity
 import { MediaEntity } from "./entities/MediaEntity.js";

@@ -2,6 +2,8 @@
 
 Plugins let you add custom behavior to Dropp without editing core code.
 
+Which is great, because editing core code at 2AM is a lifestyle we do not recommend.
+
 ## Built-in plugins
 
 - Watermark
@@ -47,6 +49,9 @@ Use hooks to validate inputs, enrich metadata, or trigger side effects.
 - Keep upload-path hooks fast
 - Fail with clear error messages
 
+Your future teammate (possibly also you) will thank you.
+
 ## More details
 
-- Core plugin docs: [../packages/plugins/core/PLUGIN_GUIDE.md](../packages/plugins/core/PLUGIN_GUIDE.md)
+- API reference: [API_REFERENCE.md](API_REFERENCE.md)
+- CLI reference: [CLI_REFERENCE.md](CLI_REFERENCE.md)

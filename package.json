@@ -1,21 +1,92 @@
 {
-  "name": "dropp",
-  "version": "0.1.0",
-  "private": true,
+  "name": "droppjs",
+  "version": "0.1.12",
+  "type": "module",
   "author": "Ribal Arshad",
-  "description": "Enterprise, framework-agnostic media management ecosystem for Node.js",
+  "description": "Advanced all-in-one media library for Node.js (core, adapters, storage, transformers, CLI)",
   "packageManager": "pnpm@10.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "dropp": "./bin/run.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "oclif.manifest.json"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
-    "test": "turbo run test",
-    "test:adapters": "pnpm build && node --test tests/adapters/*.integration.test.mjs",
-    "lint": "turbo run lint",
-    "clean": "turbo run clean",
-    "typecheck": "turbo run typecheck"
+    "build": "tsc -p tsconfig.json && pnpm run manifest",
+    "manifest": "oclif manifest .",
+    "dev": "tsx src/cli/index.ts",
+    "test": "pnpm build && node ./scripts/smoke-test.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rimraf dist oclif.manifest.json",
+    "prepack": "pnpm run build"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.730.0",
+    "@azure/storage-blob": "^12.26.0",
+    "@google-cloud/storage": "^7.14.0",
+    "@oclif/core": "^4.10.3",
+    "bullmq": "^5.36.0",
+    "chalk": "^5.4.1",
+    "dotenv": "^17.3.1",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "js-yaml": "^4.1.0",
+    "mime-types": "^2.1.35",
+    "openai": "^4.52.0",
+    "sharp": "^0.34.5",
+    "zod": "^3.25.76"
+  },
+  "peerDependencies": {
+    "@mikro-orm/core": "^6.4.0",
+    "@nestjs/common": "^11.1.17",
+    "@nestjs/core": "^11.1.17",
+    "@prisma/client": "^6.0.0",
+    "drizzle-orm": "^0.45.2",
+    "express": "^4.18.0",
+    "kysely": "^0.28.14",
+    "mongoose": "^8.8.0",
+    "next": "^15.0.8 || ^16.0.0",
+    "sequelize": "^6.37.0",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
-    "turbo": "^2.1.1",
-    "typescript": "^5.6.3"
+    "@nestjs/common": "^11.1.17",
+    "@nestjs/core": "^11.1.17",
+    "@nestjs/platform-express": "^11.1.17",
+    "@types/express": "^5.0.6",
+    "@types/fluent-ffmpeg": "^2.1.27",
+    "@types/mime-types": "^2.1.4",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^25.5.0",
+    "multer": "^2.1.1",
+    "next": "^16.0.0",
+    "oclif": "^4.22.96",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.2",
+    "typescript": "^6.0.2"
+  },
+  "oclif": {
+    "bin": "dropp",
+    "commands": "./dist/cli/commands"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "brace-expansion": "^2.0.3",
+      "@tootallnate/once": "^3.0.1"
+    }
   }
 }

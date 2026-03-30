@@ -4,6 +4,8 @@ Dropp expects a repository module so it can persist and query media records.
 
 In short: your ORM does database things, Dropp does media things, and they shake hands through one exported object.
 
+Everybody has one job. Everybody is happier.
+
 ## Repository contract
 
 Your module should export `mediaRepository` and implement the expected repository methods used by Dropp.
@@ -71,3 +73,5 @@ Use the CLI migration command:
 3. `dropp list --limit 1`
 
 If that works, your ORM handshake is healthy.
+
+Handshake complete. No awkward eye contact required.

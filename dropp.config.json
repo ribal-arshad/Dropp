@@ -1,10 +1,6 @@
 {
   "orm": {
-    "driver": "drizzle",
-    "repository": {
-      "module": "./dropp.repository.js",
-      "exportName": "mediaRepository"
-    }
+    "driver": "json"
   },
   "storage": {
     "driver": "local",

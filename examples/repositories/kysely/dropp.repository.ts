@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Kysely, PostgresDialect } from "kysely";
 import { Pool } from "pg";
-import { KyselyMediaRepository } from "@droppjs/db-kysely";
+import { KyselyMediaRepository } from "droppjs";
 
 type Database = {
   media: {

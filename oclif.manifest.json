@@ -1,0 +1,1698 @@
+{
+  "commands": {
+    "attach": {
+      "aliases": [],
+      "args": {
+        "file": {
+          "description": "Path to the local file to attach",
+          "name": "file",
+          "required": true
+        }
+      },
+      "description": "Attach a local file to a model and store media metadata",
+      "flags": {
+        "model": {
+          "description": "Model name (example: Post)",
+          "name": "model",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "modelId": {
+          "description": "Model id (example: 42)",
+          "name": "modelId",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "tenantId": {
+          "description": "Tenant id for multi-tenant isolation",
+          "name": "tenantId",
+          "default": "default",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "collection": {
+          "description": "Collection name",
+          "name": "collection",
+          "default": "default",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "metadata": {
+          "description": "JSON metadata object",
+          "name": "metadata",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "attach",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "attach.js"
+      ]
+    },
+    "batch": {
+      "aliases": [],
+      "args": {},
+      "description": "Batch processing commands",
+      "flags": {},
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "batch",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "batch.js"
+      ]
+    },
+    "collections": {
+      "aliases": [],
+      "args": {},
+      "description": "Manage media collections",
+      "flags": {},
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "collections",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "collections.js"
+      ]
+    },
+    "config": {
+      "aliases": [],
+      "args": {},
+      "description": "Manage Dropp configuration",
+      "flags": {},
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "config",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "config.js"
+      ]
+    },
+    "convert": {
+      "aliases": [],
+      "args": {
+        "id": {
+          "description": "Media id",
+          "name": "id",
+          "required": true
+        }
+      },
+      "description": "Convert/transform a media item (local storage source path required)",
+      "flags": {
+        "resizeWidth": {
+          "description": "Resize width for images",
+          "name": "resizeWidth",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "resizeHeight": {
+          "description": "Resize height for images",
+          "name": "resizeHeight",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "webp": {
+          "description": "Convert image output to webp",
+          "name": "webp",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "convert",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "convert.js"
+      ]
+    },
+    "doctor": {
+      "aliases": [],
+      "args": {},
+      "description": "Validate your Dropp environment and dependencies",
+      "flags": {
+        "json": {
+          "description": "Print machine-readable JSON report",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "description": "Include additional diagnostics",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "strict": {
+          "description": "Exit with non-zero code on warnings as well",
+          "name": "strict",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "doctor",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "doctor.js"
+      ]
+    },
+    "generate": {
+      "aliases": [],
+      "args": {
+        "target": {
+          "description": "Generator target",
+          "name": "target",
+          "options": [
+            "repository",
+            "model",
+            "migration",
+            "all"
+          ],
+          "required": true
+        },
+        "value": {
+          "description": "For repository: ORM name. For model/all: model name (example: media)",
+          "name": "value",
+          "required": true
+        }
+      },
+      "description": "Generate assets like repository templates",
+      "flags": {
+        "orm": {
+          "description": "Target ORM for model/migration generation",
+          "name": "orm",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "prisma",
+            "typeorm",
+            "drizzle",
+            "sequelize",
+            "mikroorm",
+            "mongoose",
+            "kysely"
+          ],
+          "type": "option"
+        },
+        "force": {
+          "char": "f",
+          "description": "Overwrite existing generated file",
+          "name": "force",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "configOnly": {
+          "description": "Only patch dropp.config.json without writing template file",
+          "name": "configOnly",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "generate",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "generate.js"
+      ]
+    },
+    "get": {
+      "aliases": [],
+      "args": {
+        "id": {
+          "description": "Media id",
+          "name": "id",
+          "required": true
+        }
+      },
+      "description": "Get a media item by id from local metadata store",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "get",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "get.js"
+      ]
+    },
+    "info": {
+      "aliases": [],
+      "args": {
+        "id": {
+          "description": "Media id",
+          "name": "id",
+          "required": true
+        }
+      },
+      "description": "Show detailed media information",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "info",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "info.js"
+      ]
+    },
+    "init": {
+      "aliases": [],
+      "args": {},
+      "description": "Initialize Dropp configuration in the current project",
+      "flags": {
+        "force": {
+          "char": "f",
+          "description": "Overwrite existing dropp.config.json",
+          "name": "force",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "init",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "init.js"
+      ]
+    },
+    "list": {
+      "aliases": [],
+      "args": {},
+      "description": "List attached media items from local metadata store",
+      "flags": {
+        "model": {
+          "description": "Filter by model name",
+          "name": "model",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "modelId": {
+          "description": "Filter by model id (requires --model for scoped filtering)",
+          "name": "modelId",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "tenantId": {
+          "description": "Filter by tenant id",
+          "name": "tenantId",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "collection": {
+          "description": "Filter by collection name",
+          "name": "collection",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "mimeType": {
+          "description": "Filter by mime type prefix (example: image/)",
+          "name": "mimeType",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "fileName": {
+          "description": "Filter by filename contains (case-insensitive)",
+          "name": "fileName",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "createdAfter": {
+          "description": "Filter by createdAt >= ISO date",
+          "name": "createdAfter",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "createdBefore": {
+          "description": "Filter by createdAt <= ISO date",
+          "name": "createdBefore",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "sort": {
+          "description": "Sort order by createdAt",
+          "name": "sort",
+          "default": "createdAt:desc",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "createdAt:asc",
+            "createdAt:desc"
+          ],
+          "type": "option"
+        },
+        "limit": {
+          "description": "Limit number of returned items",
+          "name": "limit",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "list",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "list.js"
+      ]
+    },
+    "migrate": {
+      "aliases": [],
+      "args": {},
+      "description": "Run database migrations for the configured ORM",
+      "examples": [
+        "<%= config.bin %> <%= command.id %>",
+        "<%= config.bin %> <%= command.id %> --mode status",
+        "<%= config.bin %> <%= command.id %> --orm prisma --name create_media_table",
+        "<%= config.bin %> <%= command.id %> --dry-run"
+      ],
+      "flags": {
+        "orm": {
+          "description": "Override ORM driver from config",
+          "name": "orm",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "prisma",
+            "typeorm",
+            "drizzle",
+            "sequelize",
+            "mikroorm",
+            "mongoose",
+            "kysely",
+            "json",
+            "custom"
+          ],
+          "type": "option"
+        },
+        "mode": {
+          "description": "Migration mode",
+          "name": "mode",
+          "default": "dev",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "dev",
+            "deploy",
+            "status"
+          ],
+          "type": "option"
+        },
+        "name": {
+          "description": "Migration name (used by Prisma dev mode)",
+          "name": "name",
+          "default": "dropp_migration",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "dryRun": {
+          "description": "Print migration command without executing",
+          "name": "dryRun",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "migrate",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "migrate.js"
+      ]
+    },
+    "optimize": {
+      "aliases": [],
+      "args": {
+        "id": {
+          "description": "Media id",
+          "name": "id",
+          "required": true
+        }
+      },
+      "description": "Optimize media output (local storage source path required)",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "optimize",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "optimize.js"
+      ]
+    },
+    "plugin": {
+      "aliases": [],
+      "args": {},
+      "description": "Manage Dropp plugins",
+      "flags": {},
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "plugin",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "plugin.js"
+      ]
+    },
+    "remove": {
+      "aliases": [],
+      "args": {
+        "id": {
+          "description": "Media id",
+          "name": "id",
+          "required": true
+        }
+      },
+      "description": "Remove a media item by id",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "remove",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "remove.js"
+      ]
+    },
+    "responsive-generate": {
+      "aliases": [],
+      "args": {
+        "id": {
+          "description": "Media id",
+          "name": "id",
+          "required": true
+        }
+      },
+      "description": "Generate responsive image variants for a media item",
+      "flags": {
+        "preset": {
+          "description": "Preset: mobile, tablet, desktop, universal",
+          "name": "preset",
+          "default": "universal",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "mobile",
+            "tablet",
+            "desktop",
+            "universal"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "responsive-generate",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "responsive-generate.js"
+      ]
+    },
+    "rollback": {
+      "aliases": [],
+      "args": {
+        "id": {
+          "description": "Current media id",
+          "name": "id",
+          "required": true
+        }
+      },
+      "description": "Rollback a media record to previous version",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "rollback",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "rollback.js"
+      ]
+    },
+    "storage-sync": {
+      "aliases": [],
+      "args": {},
+      "description": "Sync local media files to the configured cloud storage backend",
+      "flags": {
+        "fromDir": {
+          "description": "Base local media directory",
+          "name": "fromDir",
+          "default": "media",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "dryRun": {
+          "description": "Preview synchronization without uploading",
+          "name": "dryRun",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "retryAttempts": {
+          "description": "Retry attempts per file",
+          "name": "retryAttempts",
+          "default": 3,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "storage-sync",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "storage-sync.js"
+      ]
+    },
+    "watch": {
+      "aliases": [],
+      "args": {},
+      "description": "Watch a directory and auto-attach newly created files",
+      "flags": {
+        "dir": {
+          "description": "Directory to watch",
+          "name": "dir",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "model": {
+          "description": "Model name",
+          "name": "model",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "modelId": {
+          "description": "Model id",
+          "name": "modelId",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "tenantId": {
+          "description": "Tenant id",
+          "name": "tenantId",
+          "default": "default",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "collection": {
+          "description": "Collection name",
+          "name": "collection",
+          "default": "default",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "retryAttempts": {
+          "description": "Retry attempts per file",
+          "name": "retryAttempts",
+          "default": 3,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "retryDelay": {
+          "description": "Initial retry delay in ms",
+          "name": "retryDelay",
+          "default": 100,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "watch",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "watch.js"
+      ]
+    },
+    "analytics:report": {
+      "aliases": [],
+      "args": {},
+      "description": "Generate media analytics summary report",
+      "flags": {
+        "tenantId": {
+          "description": "Filter by tenant id",
+          "name": "tenantId",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "analytics:report",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "analytics",
+        "report.js"
+      ]
+    },
+    "batch:process": {
+      "aliases": [],
+      "args": {
+        "configFile": {
+          "description": "Path to batch JSON file",
+          "name": "configFile",
+          "required": true
+        }
+      },
+      "description": "Process and attach multiple files from a batch config JSON file",
+      "flags": {
+        "dryRun": {
+          "description": "Preview operations without uploading",
+          "name": "dryRun",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "resume": {
+          "description": "Resume from checkpoint file and skip processed items",
+          "name": "resume",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "checkpointFile": {
+          "description": "Path to checkpoint file",
+          "name": "checkpointFile",
+          "default": ".dropp-batch-checkpoint.json",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "concurrency": {
+          "description": "Number of parallel workers",
+          "name": "concurrency",
+          "default": 1,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "workerThreads": {
+          "description": "Use worker threads for batch item processing",
+          "name": "workerThreads",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "stopOnError": {
+          "description": "Stop batch on first error (fail-fast for CI)",
+          "name": "stopOnError",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "batch:process",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "batch",
+        "process.js"
+      ]
+    },
+    "cdn:invalidate": {
+      "aliases": [],
+      "args": {},
+      "description": "Invalidate CDN cache paths",
+      "flags": {
+        "path": {
+          "description": "Path to purge (repeatable)",
+          "name": "path",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": true,
+          "type": "option"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "cdn:invalidate",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "cdn",
+        "invalidate.js"
+      ]
+    },
+    "collections:add-media": {
+      "aliases": [],
+      "args": {
+        "collectionId": {
+          "description": "Collection id",
+          "name": "collectionId",
+          "required": true
+        },
+        "mediaId": {
+          "description": "Media id",
+          "name": "mediaId",
+          "required": true
+        }
+      },
+      "description": "Add a media item to a collection",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "collections:add-media",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "collections",
+        "add-media.js"
+      ]
+    },
+    "collections:create": {
+      "aliases": [],
+      "args": {
+        "name": {
+          "description": "Collection name",
+          "name": "name",
+          "required": true
+        }
+      },
+      "description": "Create a new media collection",
+      "flags": {
+        "description": {
+          "description": "Collection description",
+          "name": "description",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "customProperties": {
+          "description": "JSON object for custom properties",
+          "name": "customProperties",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "collections:create",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "collections",
+        "create.js"
+      ]
+    },
+    "collections:list": {
+      "aliases": [],
+      "args": {},
+      "description": "List all media collections",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "collections:list",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "collections",
+        "list.js"
+      ]
+    },
+    "collections:remove-media": {
+      "aliases": [],
+      "args": {
+        "collectionId": {
+          "description": "Collection id",
+          "name": "collectionId",
+          "required": true
+        },
+        "mediaId": {
+          "description": "Media id",
+          "name": "mediaId",
+          "required": true
+        }
+      },
+      "description": "Remove a media item from a collection",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "collections:remove-media",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "collections",
+        "remove-media.js"
+      ]
+    },
+    "config:init": {
+      "aliases": [],
+      "args": {},
+      "description": "Generate dropp.config.json in current project",
+      "flags": {
+        "force": {
+          "char": "f",
+          "description": "Overwrite existing dropp.config.json",
+          "name": "force",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "config:init",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "config",
+        "init.js"
+      ]
+    },
+    "config:show": {
+      "aliases": [],
+      "args": {},
+      "description": "Show the resolved Dropp configuration",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "config:show",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "config",
+        "show.js"
+      ]
+    },
+    "config:validate": {
+      "aliases": [],
+      "args": {},
+      "description": "Validate dropp.config.json schema and required values",
+      "flags": {
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "config:validate",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "config",
+        "validate.js"
+      ]
+    },
+    "generate:all": {
+      "aliases": [],
+      "args": {
+        "name": {
+          "description": "Project/model name (example: media)",
+          "name": "name",
+          "required": true
+        }
+      },
+      "description": "Generate repository, model, and migration in one command",
+      "flags": {
+        "orm": {
+          "description": "Target ORM",
+          "name": "orm",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "prisma",
+            "typeorm",
+            "drizzle",
+            "sequelize",
+            "mikroorm",
+            "mongoose",
+            "kysely"
+          ],
+          "type": "option"
+        },
+        "force": {
+          "char": "f",
+          "description": "Overwrite existing generated files",
+          "name": "force",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "generate:all",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "generate",
+        "all.js"
+      ]
+    },
+    "generate:migration": {
+      "aliases": [],
+      "args": {
+        "name": {
+          "description": "Migration name (example: create-media-table)",
+          "name": "name",
+          "required": true
+        }
+      },
+      "description": "Generate migration boilerplate for a target ORM",
+      "flags": {
+        "orm": {
+          "description": "Target ORM",
+          "name": "orm",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "prisma",
+            "typeorm",
+            "drizzle",
+            "sequelize",
+            "mikroorm",
+            "mongoose",
+            "kysely"
+          ],
+          "type": "option"
+        },
+        "force": {
+          "char": "f",
+          "description": "Overwrite existing migration file",
+          "name": "force",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "generate:migration",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "generate",
+        "migration.js"
+      ]
+    },
+    "generate:model": {
+      "aliases": [],
+      "args": {
+        "name": {
+          "description": "Model name (example: media)",
+          "name": "name",
+          "required": true
+        }
+      },
+      "description": "Generate media model/schema boilerplate for a target ORM",
+      "flags": {
+        "orm": {
+          "description": "Target ORM",
+          "name": "orm",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "prisma",
+            "typeorm",
+            "drizzle",
+            "sequelize",
+            "mikroorm",
+            "mongoose",
+            "kysely"
+          ],
+          "type": "option"
+        },
+        "force": {
+          "char": "f",
+          "description": "Overwrite existing generated model file",
+          "name": "force",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "generate:model",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "generate",
+        "model.js"
+      ]
+    },
+    "generate:repository": {
+      "aliases": [],
+      "args": {
+        "orm": {
+          "description": "Target ORM template",
+          "name": "orm",
+          "options": [
+            "prisma",
+            "typeorm",
+            "drizzle",
+            "sequelize",
+            "mikroorm",
+            "mongoose",
+            "kysely"
+          ],
+          "required": true
+        }
+      },
+      "description": "Generate a dropp.repository.ts template and wire dropp.config.json",
+      "flags": {
+        "force": {
+          "char": "f",
+          "description": "Overwrite existing dropp.repository.ts",
+          "name": "force",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "configOnly": {
+          "description": "Only patch dropp.config.json without writing template file",
+          "name": "configOnly",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "generate:repository",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "generate",
+        "repository.js"
+      ]
+    },
+    "plugin:install": {
+      "aliases": [],
+      "args": {
+        "name": {
+          "description": "Plugin name",
+          "name": "name",
+          "options": [
+            "watermark",
+            "ai-tagging",
+            "seo"
+          ],
+          "required": true
+        }
+      },
+      "description": "Install a plugin",
+      "flags": {
+        "config": {
+          "description": "Plugin configuration as JSON",
+          "name": "config",
+          "default": "{}",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "plugin:install",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "plugin",
+        "install.js"
+      ]
+    },
+    "plugin:list": {
+      "aliases": [],
+      "args": {},
+      "description": "List installed plugins",
+      "flags": {
+        "json": {
+          "description": "Output as JSON",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "plugin:list",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "plugin",
+        "list.js"
+      ]
+    },
+    "plugin:remove": {
+      "aliases": [],
+      "args": {
+        "name": {
+          "description": "Plugin name",
+          "name": "name",
+          "required": true
+        }
+      },
+      "description": "Remove an installed plugin",
+      "flags": {},
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "plugin:remove",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "plugin",
+        "remove.js"
+      ]
+    },
+    "server:start": {
+      "aliases": [],
+      "args": {},
+      "description": "Run HTTP API server mode alongside CLI",
+      "flags": {
+        "port": {
+          "description": "Server port",
+          "name": "port",
+          "default": 8787,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "server:start",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "server",
+        "start.js"
+      ]
+    },
+    "upload:resumable": {
+      "aliases": [],
+      "args": {
+        "file": {
+          "description": "Local file path",
+          "name": "file",
+          "required": true
+        }
+      },
+      "description": "Upload using chunked resumable flow",
+      "flags": {
+        "model": {
+          "description": "Model name",
+          "name": "model",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "modelId": {
+          "description": "Model id",
+          "name": "modelId",
+          "required": true,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "tenantId": {
+          "description": "Tenant id",
+          "name": "tenantId",
+          "default": "default",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "collection": {
+          "description": "Collection",
+          "name": "collection",
+          "default": "default",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "chunkSizeMb": {
+          "description": "Chunk size MB",
+          "name": "chunkSizeMb",
+          "default": 5,
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "checkpointFile": {
+          "description": "Checkpoint file path",
+          "name": "checkpointFile",
+          "default": ".dropp-upload-checkpoint.json",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "resume": {
+          "description": "Resume from checkpoint",
+          "name": "resume",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "json": {
+          "description": "Print JSON output",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "upload:resumable",
+      "pluginAlias": "droppjs",
+      "pluginName": "droppjs",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "cli",
+        "commands",
+        "upload",
+        "resumable.js"
+      ]
+    }
+  },
+  "version": "0.1.0"
+}

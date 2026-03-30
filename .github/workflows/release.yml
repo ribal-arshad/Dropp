@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: npm-publish-droppjs-cli
+  group: npm-publish-droppjs
   cancel-in-progress: false
 
 jobs:
@@ -33,7 +33,6 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org
-          scope: "@droppjs"
           always-auth: true
           cache: pnpm
 
@@ -43,7 +42,7 @@ jobs:
           echo "Using npm config: ${NPMRC_PATH}"
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > "${NPMRC_PATH}"
           echo "always-auth=true" >> "${NPMRC_PATH}"
-          echo "@droppjs:registry=https://registry.npmjs.org/" >> "${NPMRC_PATH}"
+          echo "registry=https://registry.npmjs.org/" >> "${NPMRC_PATH}"
 
       - name: Verify npm auth
         run: npm whoami
@@ -90,15 +89,11 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Typecheck CLI
-        run: pnpm --filter @droppjs/cli typecheck
+      - name: Typecheck
+        run: pnpm typecheck
 
-      - name: Validate standalone CLI package
+      - name: Validate droppjs package
         run: |
-          cd packages/cli
-
-          # Run prepack once explicitly, then collect clean JSON pack metadata.
-          pnpm run prepack
           PACK_META=$(npm pack --json --dry-run --ignore-scripts)
           echo "$PACK_META"
 
@@ -106,7 +101,7 @@ jobs:
           PACKED_SIZE_BYTES=$(echo "$PACK_META" | node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8')); const x=Array.isArray(d)?d[0]:d; console.log(x.size ?? 0)")
           UNPACKED_SIZE_BYTES=$(echo "$PACK_META" | node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8')); const x=Array.isArray(d)?d[0]:d; console.log(x.unpackedSize ?? 0)")
 
-          echo "CLI pack stats: files=${FILE_COUNT}, packed=${PACKED_SIZE_BYTES}B, unpacked=${UNPACKED_SIZE_BYTES}B"
+          echo "droppjs pack stats: files=${FILE_COUNT}, packed=${PACKED_SIZE_BYTES}B, unpacked=${UNPACKED_SIZE_BYTES}B"
 
           # Guardrails: keep the publish payload reasonable to reduce registry stress.
           # Thresholds: <= 20MB packed and <= 5000 files.
@@ -120,13 +115,11 @@ jobs:
             exit 1
           fi
 
-      - name: Publish @droppjs/cli
-        id: publish_cli
+      - name: Publish droppjs
+        id: publish_package
         run: |
-          cd packages/cli
-
           VERSION=$(node -p "require('./package.json').version")
-          PACKAGE_NAME="@droppjs/cli"
+          PACKAGE_NAME="droppjs"
 
           if npm view "${PACKAGE_NAME}@${VERSION}" version >/dev/null 2>&1; then
             echo "${PACKAGE_NAME}@${VERSION} is already published. Skipping."
@@ -173,13 +166,13 @@ jobs:
           exit "$STATUS"
 
       - name: Upload release artifact (npm throttled)
-        if: steps.publish_cli.outputs.status == 'throttled'
+        if: steps.publish_package.outputs.status == 'throttled'
         uses: actions/upload-artifact@v4
         with:
-          name: droppjs-cli-${{ github.run_id }}-throttled
+          name: droppjs-${{ github.run_id }}-throttled
           path: |
-            packages/cli/${{ steps.publish_cli.outputs.tarball }}
-            packages/cli/publish-result.json
-            packages/cli/package.json
+            ${{ steps.publish_package.outputs.tarball }}
+            publish-result.json
+            package.json
           if-no-files-found: error
           retention-days: 14
